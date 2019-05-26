@@ -1,0 +1,407 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Typescript</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/beige.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-transition="zoom">
+					<h1 style="color:#005090;">Typescript:</h1>
+					<h2>JS that scales</h2>
+					<aside class="notes">
+						Greeting. Introduction of the topic.
+					</aside>
+				</section>
+				<section data-transition="slide">
+					<h2 style="color:#177F75;">Plan</h2>
+					<ul>
+						<li>Introduction to Typescript</li>
+						<li>Typescript Language Features
+							<ul>
+								<li>Type System</li>
+								<li>Interfaces</li>
+								<li>Classes</li>
+							</ul>
+						</li>
+						<li>Typescript as a static type checker</li>
+						<li>Conclusion</li>
+					</ul>
+					<aside class="notes">
+						Inform the listeners on what you are going to speak about:
+						a few words about what Typescript is,
+						discuss the basic features,
+						show some examples.
+					</aside>
+				</section>
+				<section data-transition="slide">
+					<h2>Typescript – a <span style="color:#0c7698;">typed superset</span> of JS </h2>
+					<h3 style="color:#7F5417;">Starts with JS and ends with JS</h3>
+					<h4>Any browser. Any host. Any OS. Open source</h4>
+					<aside class="notes">
+						Explain why typescript starts with JS and ends with JS( starts with the same syntax and semantics as JS and compiles into simple and plain JS).
+						GitHub community (contribute to the debuggind and development).
+					</aside>
+				</section>
+				<section data-transition="slide">
+					<section data-transition="slide"><h2 style="color:#005090;">typescript features</h2>
+						<ul>
+							<li>Type annotations</li>
+							<li>Type inference</li>
+							<li>Type erasure</li>
+							<li>Interfaces</li>
+							<li>Enumerated types</li>
+							<li>Generics</li>
+							<li>Namespaces</li>
+							<li>Tuples</li>
+							<li>Async/await</li>
+						</ul>
+						<aside class="notes">
+							Inform the listeners on what you are going to speak about:
+							a few words about what Typescript is,
+							discuss the basic features,
+							show some examples.
+						</aside>
+					</section>
+					<section data-transition="slide">
+							<h2 style="color:#005090;">typescript features</h2>
+							<ul>
+								<li>Classes</li>
+								<li>Modules</li>
+								<li>Abbreviated "arrow" syntax for anonymous functions</li>
+								<li>Optional and default parameters</li>
+							</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2 style="color:#005090">Type system</h2>
+						<h4>Number</h4>
+						<pre><code data-trim data-noescape>
+								let decimal<mark>: number</mark> = 6;
+								let hex: number = 0xf00d;
+								let binary: number = 0b1010;
+								let octal: number = 0o744;
+						</code></pre>
+						<h4>Boolean</h4>
+						<pre><code data-trim data-noescape>
+							let isDone<mark>: boolean</mark> = false;
+						</code></pre>
+						<h4>String</h4>
+						<pre><code data-trim data-noescape>
+								let color<mark>: string</mark> = "blue";
+								color = 'red';
+						</code></pre>
+					</section>
+					<section>
+						<h3>Array</h3>
+						<pre><code data-trim data-noescape>
+							let list<mark>: number[]</mark> = [1, 2, 3];
+						</code></pre>
+						<h3>Object</h3>
+						<p>Object is a type that represents the non-primitive type (not number, string, boolean, symbol, null, or undefined).</p>
+						<pre><code data-trim data-noescape>
+							declare function create(<mark>o: object </mark>| null): void;
+
+							create({ prop: 0 }); // OK
+							create(null); // OK
+								
+							create(42); // Error
+							create("string"); // Error
+							create(false); // Error
+							create(undefined); // Error
+						</code></pre>	
+					</section>
+					<section>
+						<h2 style="color:#005090">Type system</h2>
+						<h4>Tuple</h4>
+						<p>Express an array where the type of a fixed number of elements is known, but need not be the same.</p>
+						<pre><code data-trim data-noescape>
+								// Declare a tuple type
+								let <mark>x: [string, number]</mark>;
+								// Initialize it
+								x = ["hello", 10]; // OK
+								// Initialize it incorrectly
+								x = [10, "hello"]; // Error</code></pre>
+					</section>
+					<section>
+						<h3 style="color:#005090">Type system</h3>
+						<h4>Any</h4>
+						<p>The type of variables that we do not know when we are writing an application.</p>
+						<pre><code data-trim data-noescape>
+							let notSure<mark>: any</mark> = 4;
+							notSure = "maybe a string instead";
+							notSure = false; // okay, definitely a boolean
+						</code></pre>
+						<h4>Void</h4>
+						<p>The absence of having any type at all</p>
+						<pre><code data-trim data-noescape>
+							function <mark>warnUser(): void</mark> {
+								console.log("This is my warning message");
+							}
+						</code></pre>
+					</section>
+					<section>
+						<h3 style="color:#005090">Type system</h3>
+						<h4>Enum</h4>
+						<pre><code data-trim data-noescape>
+							enum Color {Red, Green, Blue}
+							let c: Color = Color.Green;
+						</code></pre>
+						<h4>Null and Undefined</h4>
+						<pre><code data-trim data-noescape>
+							// Not much else we can assign to these variables!
+							let u: undefined = undefined;
+							let n: null = null;
+						</code></pre>
+						<h4>Never</h4>
+						<p>Values that never occur</p>
+						<pre><code data-trim data-noescape>
+							// Function returning never must have unreachable end point
+							function error(message: string): never {
+								throw new Error(message);
+							}
+						</code></pre>
+					</section>
+					<section data-transition="slide">
+						<a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">Typescript Handbook</a>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2 style="color:#7F171F">Classes</h2>
+						<img src="./assets/oop.png" alt="duck-typing" width="580px" height="400px">
+					</section>
+					<section>
+						<h3 style="color:#005090">Examples</h3>
+						<pre><code data-trim data-noescape>
+								class Greeter {
+									greeting: string;
+									constructor(message: string) {
+										this.greeting = message;
+									}
+									greet() {
+										return "Hello, " + this.greeting;
+									}
+								}
+								
+								let greeter = new Greeter("world");
+						</code></pre>
+					</section>
+					<section>
+						<h4 style="color:#005090">Inheritance</h4>
+						<pre><code data-trim data-noescape>
+								class Animal {
+									move(distanceInMeters: number = 0) {
+										console.log(`Animal moved ${distanceInMeters}m.`);
+									}
+								}
+								
+								class Dog extends Animal {
+									bark() {
+										console.log('Woof! Woof!');
+									}
+								}
+						</code></pre>
+					</section>
+					<section>
+						<h3 style="color:#005090">Public</h3>
+						<pre><code data-trim data-noescape>
+								class Animal {
+									<mark>public</mark> name: string;
+									<mark>public</mark> constructor(theName: string) { this.name = theName; }
+									<mark>public</mark> move(distanceInMeters: number) {
+										console.log(`${this.name}`);
+									}
+								}
+						</code></pre>
+					</section>
+					<section>
+						<h3 style="color:#005090">Private</h3>
+						<p>When a member is marked private, it cannot be accessed from outside of its containing class.</p>
+						<pre><code data-trim data-noescape>
+								class Animal {
+								  <mark>private</mark> name: string;
+								  constructor(theName: string) { this.name = theName; }
+								}
+								
+								new Animal("Cat").name; // Error: 'name' is private;
+						</code></pre>
+					</section>
+					<section>
+						<h3 style="color:#005090">Protected</h3>
+						<p>Members declared protected can also be accessed within deriving classes</p>
+						<pre><code data-trim data-noescape>
+								class Person {
+								  <mark>protected</mark> name: string;
+								  constructor(name: string) { this.name = name; }
+								}
+								class Employee extends Person {
+								  private department: string;
+								  constructor(name: string, department: string) {
+									super(name);
+									this.department = department;
+								  }
+								}
+								
+								let howard = new Employee("Howard", "Sales");
+								console.log(howard.name); // error
+						</code></pre>
+					</section>
+					<section>
+						<h3 style="color:#005090">Readonly</h3>
+						<pre><code data-trim data-noescape>
+								class Octopus {
+								  <mark>readonly</mark> name: string;
+								  <mark>readonly</mark> numberOfLegs: number = 8;
+								  constructor (theName: string) {
+									this.name = theName;
+								  }
+								}
+								let dad = new Octopus("Man with the 8 strong legs");
+								dad.name = "Man with the 3-piece suit"; // error! name is readonly.
+						</code></pre>
+					</section>
+					<section>
+						<h3 style="color:#005090">Abstract Classes</h3>
+						<pre><code data-trim data-noescape>
+								<mark>abstract</mark> class Department {
+								  constructor(public name: string) {
+								  }
+								  <mark>abstract</mark> printMeeting(): void;
+								}
+								
+								class AccountingDepartment extends Department {
+								  constructor() {
+									super("Accounting and Auditing");
+								  }								
+								  printMeeting(): void {
+									console.log("Meets each Monday at 10am.");
+								  }
+								}
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2 style="color:#7F171F">Interfaces</h2>
+						<img src="./assets/duck-typing.jpg" alt="duck-typing" width="728px" height="546px">
+					</section>
+					<section>
+						<h3 style="color:#005090">Examples</h3>
+						<pre><code data-trim data-noescape>
+								interface LabeledValue {
+									label: string;
+								}	
+								function printLabel(labeledObj: LabeledValue) {
+									console.log(labeledObj.label);
+								}
+								let myObj = {size: 10, label: "Size 10 Object"};
+								printLabel(myObj);
+						</code></pre>
+					</section>
+					<section>
+							<h3 style="color:#005090">Classes Extending Interfaces</h3>
+							<pre><code data-trim data-noescape>
+									interface ClockInterface {
+										currentTime: Date;
+										setTime(d: Date): void;
+									}
+									class Clock implements ClockInterface {
+										currentTime: Date = new Date();
+										setTime(d: Date) {
+											this.currentTime = d;
+										}
+										constructor(h: number, m: number) { }
+									}
+							</code></pre>
+						</section>
+					<section>
+						<h4 style="color:#005090">Optional Properties</h4>
+						<pre><code data-trim data-noescape>
+								interface SquareConfig {
+									color<mark>?</mark> string;
+									width<mark>?</mark> number;
+								}								
+								function createSquare(config: SquareConfig): 
+									{color: string; area: number} {
+									let newSquare = {color: "white", area: 100};
+									if (config.color) {
+										newSquare.color = config.color;
+									}
+									if (config.width) {
+										newSquare.area = config.width * config.width;
+									}
+									return newSquare;
+								}								
+						</code></pre>
+					</section>
+					<section>
+						<h3 style="color:#005090">Readonly Properties</h3>
+						<pre><code data-trim data-noescape>
+								interface Point {
+									<mark>readonly</mark> x: number;
+									<mark>readonly</mark> y: number;
+								}
+
+								let p1: Point = { x: 10, y: 20 };
+								p1.x = 5; // error!
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section data-background-image="./assets/checker-improper-age-light.png" data-background-size="contain"></section>
+					<section data-background-video="./assets/checker-well-done.mp4"></section>
+					<section data-background-video="./assets/transpolation.mp4"></section>
+					<section data-background-image="./assets/transpolation-light.png" data-background-size="contain"></section>
+				</section>
+				<section>
+					<h2>Useful Links</h2>
+					<ul>
+						<li><a href="https://www.typescriptlang.org/index.html" target="_blank">Typescript Official Website</a></li>
+						<li><a href="https://slack.engineering/typescript-at-slack-a81307fa288d" target="_blank">"TypeScript at Slack", article by Felix Rieseberg</a></li>
+						<li><a href="https://github.com/microsoft/TypeScript" target="_blank">Typescript GitHub</a></li>
+					</ul>	
+				</section>
+				<section>
+					<h2>Thank you for your attention!</h2>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
